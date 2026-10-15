@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+<defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bfeaff"/><stop offset="1" stop-color="#fff3c4"/></linearGradient>
+<linearGradient id="soil" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a8663a"/><stop offset="1" stop-color="#7a4425"/></linearGradient></defs>
+<rect x="0" y="0" width="100%" height="100%" fill="url(#sky)"/>
+<circle cx="410" cy="100" r="54" fill="#ffd23f"/>
+<ellipse cx="256" cy="430" rx="210" ry="70" fill="url(#soil)"/>
+<path d="M256 400 C256 330 250 280 256 230" stroke="#3f9b34" stroke-width="22" fill="none" stroke-linecap="round"/>
+<path d="M254 290 C200 290 150 250 140 190 C200 185 250 220 254 290Z" fill="#6ccf4c" stroke="#2f7d28" stroke-width="10" stroke-linejoin="round"/>
+<path d="M258 250 C300 250 360 210 375 140 C305 140 262 185 258 250Z" fill="#8ee05e" stroke="#2f7d28" stroke-width="10" stroke-linejoin="round"/>
+<g transform="translate(70 70) rotate(-18)"><path d="M10 120 h120 l-10 90 h-100z" fill="#4fa3e0" stroke="#255f8a" stroke-width="10" stroke-linejoin="round"/><path d="M130 140 l70 -40" stroke="#255f8a" stroke-width="14" stroke-linecap="round"/><path d="M30 120 c0 -40 80 -40 80 0" fill="none" stroke="#255f8a" stroke-width="10"/></g>
+<circle cx="215" cy="215" r="9" fill="#7cc8ff"/><circle cx="230" cy="185" r="7" fill="#7cc8ff"/>
+</svg>
