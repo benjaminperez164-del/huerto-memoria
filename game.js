@@ -1,5 +1,5 @@
 // Huerto de Memoria
-const VERSION='0.1.0';
+const VERSION='0.1.1';
 const $=id=>document.getElementById(id),app=$('app');
 const KEY='huertoMemoria.v1';
 const SIZES=[[3,3],[3,4],[4,4],[4,5]]; // columnas × filas
@@ -56,14 +56,15 @@ async function recall(){const t=++tok,L=S.tomorrow,items=shuffle(L.items.map(x=>
  let found=0,first=0,gain=0;
  el(topBar()+'<div class="prompt" id="pr"></div>'+grid(L.cols,L.rows)+'<p class="sub small">Toca dónde sembraste cada planta para regarla 💧</p>');bindTop();
  const ps=plots();ps.forEach(p=>p.classList.add('cov'));
- for(const it of items){let tries=0;
+ for(const it0 of items){if(it0.done)continue;const it=it0;let tries=0;
   $('pr').innerHTML='<span class="ic">'+it.s+'</span> ¿Dónde sembraste '+(it.s==='🌳'?'tu árbol':SEEDS[it.s].n)+'?';
   await new Promise(res=>{ps.forEach((p,i)=>p.onclick=()=>{if(t!==tok)return;
-   if(i===it.i){p.classList.remove('cov','glow');p.classList.add('ok');setPlant(p,it.s==='🌳'?(S.tree&&S.tree.care>=2?'🍎':'🌳'):it.s);
+   const m=items.find(x=>!x.done&&x.s===it.s&&x.i===i);
+   if(m){m.done=1;if(m!==it){const j=m.i;m.i=it.i;it.i=j;m.done=0;it.done=1;}p.classList.remove('cov','glow');p.classList.add('ok');setPlant(p,it.s==='🌳'?(S.tree&&S.tree.care>=2?'🍎':'🌳'):it.s);
     const d=document.createElement('span');d.className='drop';d.textContent='💧';p.appendChild(d);
     if(tries===0){first++;if(it.s==='🌳'&&S.tree){S.tree.care++;}}
     gain+=tries===0?(S.pozo?3:2):1;score(tries===0);ps.forEach(q=>q.onclick=null);setTimeout(res,700);}
-   else if(!p.classList.contains('ok')){tries++;p.classList.add('shake');setTimeout(()=>p.classList.remove('shake'),400);if(tries>=2)ps[it.i].classList.add('glow');}});});
+   else if(!p.classList.contains('ok')){tries++;p.classList.add('shake');setTimeout(()=>p.classList.remove('shake'),400);if(tries>=2)items.filter(x=>!x.done&&x.s===it.s).forEach(x=>ps[x.i].classList.add('glow'));}});});
   found++;}
  let fruit='';if(S.tree&&S.tree.care>=3){gain+=5;fruit='<p>🍎 ¡Tu árbol dio frutos! +5</p>';}
  S.coins+=gain;ses.earn+=gain;S.tomorrow=null;adapt(first/items.length);save();
